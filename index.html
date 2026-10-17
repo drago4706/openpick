@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenPick | India-First Electronics Recommendations</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0a0a0c',
+                        surface: '#18181b',
+                        surfaceHighlight: '#27272a',
+                        primary: '#6366f1',
+                        textMain: '#f4f4f5',
+                        textMuted: '#a1a1aa',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- React & ReactDOM via CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for in-browser JSX parsing -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-background text-textMain min-h-screen font-sans antialiased">
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // SVG Icon Components to replace Lucide React for the single-file version
+        const IconSearch = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
+        const IconSliders = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg>;
+        const IconLaptop = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>;
+        const IconPhone = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>;
+
+        function NavItem({ icon, label, active = false }) {
+            return (
+                <a href="#" className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${active ? 'bg-primary/10 text-primary' : 'text-textMuted hover:bg-surfaceHighlight hover:text-textMain'}`}>
+                    {icon}
+                    <span className="font-medium">{label}</span>
+                </a>
+            );
+        }
+
+        function App() {
+            return (
+                <div className="flex h-screen bg-background flex-col md:flex-row">
+                    {/* Sidebar */}
+                    <aside className="w-full md:w-64 bg-surface border-b md:border-b-0 md:border-r border-surfaceHighlight p-4 flex flex-col gap-6">
+                        <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 rounded bg-primary flex items-center justify-center font-bold text-white">OP</div>
+                            <h1 className="text-xl font-bold tracking-wide text-textMain">OpenPick</h1>
+                        </div>
+                        
+                        <nav className="flex flex-col gap-2 flex-grow">
+                            <NavItem icon={<IconSearch />} label="Discover" active={true} />
+                            <NavItem icon={<IconSliders />} label="Requirements Builder" />
+                            <div className="my-4 border-t border-surfaceHighlight"></div>
+                            <span className="text-xs font-semibold text-textMuted uppercase tracking-wider mb-2">Categories</span>
+                            <NavItem icon={<IconLaptop />} label="Laptops" />
+                            <NavItem icon={<IconPhone />} label="Smartphones" />
+                        </nav>
+                    </aside>
+
+                    {/* Main Content */}
+                    <main className="flex-1 p-6 md:p-10 overflow-y-auto">
+                        <header className="mb-8">
+                            <h2 className="text-3xl font-semibold text-textMain">Universal Search</h2>
+                            <p className="text-textMuted mt-1">Find the perfect electronics tailored for the Indian market.</p>
+                        </header>
+
+                        <div className="bg-surface border border-surfaceHighlight rounded-xl p-6 shadow-lg">
+                            <div className="h-64 flex flex-col items-center justify-center border-2 border-dashed border-surfaceHighlight rounded-lg">
+                                <IconSliders />
+                                <p className="text-textMuted mt-4">Requirement Builder & Universal Search will load here.</p>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
